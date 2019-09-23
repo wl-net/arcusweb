@@ -2,4 +2,6 @@ bin/localhost.cert
 bin/localhost.key
 build
 .gradle
+dev-bundle.css
+dev-bundle.js
 node_modules
