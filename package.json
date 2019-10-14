@@ -150,6 +150,7 @@
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-promise": "^3.4.0",
     "eslint-plugin-react": "^6.10.0",
+    "eslint-plugin-standard": "^4.0.1",
     "express": "^4.17.1",
     "express-history-api-fallback": "^2.0.0",
     "fs-extra": "^0.30.0",
