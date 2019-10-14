@@ -25,7 +25,7 @@
     "type": "git",
     "url": "git@bitbucket.org:eyeris/i2web.git"
   },
-  "license": "© 2019 Arcus",
+  "license": "Apache-2.0",
   "main": "i2web/index.stache!done-autorender",
   "files": [
     "src"
