@@ -15,7 +15,7 @@
 #!/bin/bash
 
 DOCKER_BIN="docker"
-DOCKER_PROJECT="eyeris"
+DOCKER_PROJECT="arcus"
 
 docker_build() {
     local DOCKER_PATH="$1"
