@@ -1,5 +1,5 @@
 
-def dockerGroup = "eyeris"
+def dockerGroup = "arcus"
 def dockerVersion = "${version_major}.${version_minor}.${version_patch}-${repo.head().abbreviatedId}";
 
 def servers = [
