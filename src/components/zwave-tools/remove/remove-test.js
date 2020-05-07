@@ -59,15 +59,6 @@ describe('i2web/components/zwave-tools/remove', function zwaveRemove() {
       assert.equal($('h4').text(), 'Searching...');
     });
 
-    it('cancel on search page, stops unpairing and closes modal', function cancel(done) {
-      F('.btn-cancel').exists().click(() => {
-        assert.equal(actionType, 'STOP_UNPAIRING');
-        assert.notOk(scope.attr('open'));
-        assert.notOk($('arcus-zwave-tools-remove').length);
-        done();
-      });
-    });
-
     it('shows success page if device is removed', function success(done) {
       canEvent.trigger.call(hub, 'hubzwave:numDevices');
       canEvent.trigger.call(hub, 'hub:state', ['NORMAL', 'UNPAIRING']);
@@ -84,6 +75,17 @@ describe('i2web/components/zwave-tools/remove', function zwaveRemove() {
         assert.equal($('h4').text(), 'Removal Timed Out');
         assert.equal($('.btn').text(), 'Keep Searching');
         assert.equal($('.btn-cancel').text(), 'Cancel');
+        done();
+      });
+    });
+  });
+
+  describe('interactions', function interactions() {
+    it('cancel on search page, stops unpairing and closes modal', function cancel(done) {
+      F('.btn-cancel').exists().click(() => {
+        assert.equal(actionType, 'STOP_UNPAIRING');
+        assert.notOk(scope.attr('open'));
+        assert.notOk($('arcus-zwave-tools-remove').length);
         done();
       });
     });
