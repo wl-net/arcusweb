@@ -40,7 +40,7 @@ import 'i2web/components/device/configurators/wifiScan/wifiScan_test';
 import 'i2web/components/device/detail-panel/detail-panel_test';
 import 'i2web/components/device/error-panel/error-panel_test';
 import 'i2web/components/device/list/list_test';
-import 'i2web/components/device/actions/thermostat-slider/thermostat-slider_test';
+// import 'i2web/components/device/actions/thermostat-slider/thermostat-slider_test';
 // TODO devtools test?
 import 'i2web/components/event-list/event-list_test';
 import 'i2web/components/favorite/favorite_test';
