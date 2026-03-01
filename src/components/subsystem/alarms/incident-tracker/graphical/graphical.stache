@@ -35,7 +35,7 @@ limitations under the License.
     <span class="place-name">{{place['place:name']}}</span>
   </div>
 {{/if}}
-<div class="swiper-container">
+<div class="swiper">
   <div class="swiper-wrapper">
     {{#each events as event}}
       <div class="swiper-slide">

@@ -18,8 +18,7 @@ import $ from 'jquery';
 import Component from 'can-component';
 import canMap from 'can-map';
 import 'can-map-define';
-import Swiper from 'swiper/dist/js/swiper';
-import 'swiper/dist/css/swiper.css';
+import Swiper from 'swiper/swiper-bundle.js';
 import view from './carousel.stache';
 import WatchElementResize from 'watch-element-resize';
 import _ from 'lodash';
@@ -107,8 +106,10 @@ export const ViewModel = canMap.extend({
   initCarousel() {
     const spaceBetween = 20;
     const config = {
-      nextButton: '.swiper-button-next',
-      prevButton: '.swiper-button-prev',
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
       spaceBetween,
       slidesPerView: this.attr('slideByPage') ? 'auto' : 1,
       observer: true,
@@ -116,16 +117,13 @@ export const ViewModel = canMap.extend({
     };
 
     if (this.attr('nav')) {
-      Object.assign(config, {
-        pagination: '.swiper-pagination',
-        paginationClickable: true,
-      });
+      config.pagination = {
+        el: '.swiper-pagination',
+        clickable: true,
+      };
     }
 
-    this.attr('carousel', new Swiper(this.attr('container'), config));
-    // Need to enable touch control by default for mobile use, won't do anything
-    // on non-touch devices.
-    this.attr('carousel').enableTouchControl();
+    this.attr('carousel', new Swiper(this.attr('container')[0], config));
   },
   /**
    * @function destroyCarousel
@@ -134,7 +132,7 @@ export const ViewModel = canMap.extend({
    */
   destroyCarousel() {
     if (this.attr('carousel')) {
-      this.attr('carousel').off('slideChangeEnd');
+      this.attr('carousel').off('slideChangeTransitionEnd');
       this.attr('carousel').destroy();
       this.attr('watchForResize').removeListener();
     }
@@ -147,16 +145,15 @@ export default Component.extend({
   view,
   events: {
     inserted(el) {
-      this.viewModel.attr('container', $(el).find('.swiper-container'));
+      this.viewModel.attr('container', $(el).find('.swiper'));
       this.viewModel.initCarousel();
-      this.viewModel.attr('carousel').on('slideChangeEnd', (e) => {
+      this.viewModel.attr('carousel').on('slideChangeTransitionEnd', (e) => {
         $(this.element).trigger('slideChanged', e);
       });
 
       const watchSize = new WatchElementResize(el);
       watchSize.on('resize', _.debounce((ev) => {
         this.viewModel.attr('containerWidth', ev.element.offset.width);
-        this.viewModel.attr('carousel').onResize(true);
       }, 100));
       // so we can remove the above resize listener later
       this.viewModel.attr('watchForResize', watchSize);

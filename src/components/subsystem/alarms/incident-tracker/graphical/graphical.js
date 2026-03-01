@@ -23,7 +23,7 @@ import Analytics from 'i2web/plugins/analytics';
 import view from './graphical.stache';
 import Incident from 'i2web/models/incident';
 import IncidentCapability from 'i2web/models/capability/AlarmIncident';
-import Swiper from 'swiper/dist/js/swiper';
+import Swiper from 'swiper/swiper-bundle.js';
 import getAppState from 'i2web/plugins/get-app-state';
 import Errors from 'i2web/plugins/errors';
 import SidePanel from 'i2web/plugins/side-panel';
@@ -200,7 +200,7 @@ export const ViewModel = canMap.extend({
           }
           this.attr('carousel').params.slidesPerView = slidesPerView;
           this.attr('carousel').params.width = width;
-          this.attr('carousel').update(true);
+          this.attr('carousel').update();
         }
         return newVal;
       },
@@ -250,8 +250,10 @@ export const ViewModel = canMap.extend({
    */
   initCarousel() {
     const config = {
-      nextButton: '.swiper-button-next',
-      prevButton: '.swiper-button-prev',
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
       slidesPerView: 2,
       width: 550,
       observer: true,
@@ -267,10 +269,8 @@ export const ViewModel = canMap.extend({
       this.attr('activeIndex', activeIndex);
     }
 
-    const carousel = new Swiper(this.attr('container'), config);
-    // Need to enable touch control by default for mobile use, won't do anything on non-touch devices.
-    carousel.enableTouchControl();
-    carousel.on('onSlideChangeEnd', () => {
+    const carousel = new Swiper(this.attr('container')[0], config);
+    carousel.on('slideChangeTransitionEnd', () => {
       this.attr('activeIndex', this.attr('carousel').activeIndex);
     });
     this.attr('carousel', carousel);
@@ -356,7 +356,7 @@ export default Component.extend({
       Analytics.tag('alarms.tracker.launched');
       this.viewModel.attr('element', el);
       this.viewModel.attr('parentClass');
-      this.viewModel.attr('container', $(el).find('.swiper-container'));
+      this.viewModel.attr('container', $(el).find('.swiper'));
       this.viewModel.initCarousel();
       const watchSize = new WatchElementResize(el);
       this.viewModel.attr('containerWidth', el.offsetWidth);
