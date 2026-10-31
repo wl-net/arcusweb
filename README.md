@@ -66,6 +66,24 @@ and navigating to
 https://localdev.arcussmarthome.com:8443
 ```
 
+### Running against a platform
+
+To log in to a real platform, create `config/local.json` (gitignored) and restart `npm run develop`. Any setting here overrides `config/development.json` and the server's defaults:
+
+```json
+{
+  "host": "localdev.example.com",
+  "sslKey": "./bin/localhost.key",
+  "sslCert": "./bin/localhost.cert",
+  "apiUrl": "https://client.example.com",
+  "wsUrl": "wss://client.example.com",
+  "redirectUrl": "https://client.example.com",
+  "useFixtures": false
+}
+```
+
+`host` needs a host entry and a matching certificate, and must share a site with the platform so the browser sends the `irisAuthToken` cookie on the WebSocket handshake. `https://<host>:8443` must also be in the platform's `CORS_ORIGINS`. `useFixtures: false` turns off the mock platform, which is otherwise on in development.
+
 ## Build and production mode
 
 To build the application into a production bundle run:

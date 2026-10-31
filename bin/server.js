@@ -27,20 +27,31 @@ const vhost = require('vhost');
 
 // Load environment-specific config from command line, env and config/*.json files
 nconf.argv().env();
+// Machine-specific settings, such as the platform to develop against. Gitignored.
+nconf.file('local', { file: './config/local.json' });
 nconf.file({ file: `./config/${nconf.get('NODE_ENV') || 'development'}.json` });
 nconf.defaults({
   "host": "localdev.irisbylowes.com",
   "port": 8443,
   "staticPath": "./",
   "liveReload": false,
+  "sslKey": "./bin/localhost.key",
+  "sslCert": "./bin/localhost.cert",
 });
 
 const ROOT = process.cwd();
 // Create app that will serve the DoneJS application
 const staticApp = express();
 
+// The browser reads its settings from this file, so serve it with overrides applied
+const clientConfig = {};
+Object.keys(require('../config/development.json')).forEach((key) => {
+  clientConfig[key] = nconf.get(key);
+});
+
 staticApp
   .use(compression())
+  .get('/config/development.json', (req, res) => res.json(clientConfig))
   .use('/', serveStatic(nconf.get('staticPath'), {
     index: nconf.get('indexFile')
   }));
@@ -90,8 +101,8 @@ if (nconf.get('NODE_ENV') === 'production') {
 const server = https.createServer({
     requestCert: true,
     rejectUnauthorized: false,
-    key: fs.readFileSync( './bin/localhost.key' ),
-    cert: fs.readFileSync( './bin/localhost.cert' ),
+    key: fs.readFileSync( nconf.get('sslKey') ),
+    cert: fs.readFileSync( nconf.get('sslCert') ),
 }, app).listen(port);
 
 server.on('error', (e) => {

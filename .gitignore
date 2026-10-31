@@ -1,5 +1,6 @@
 bin/localhost.cert
 bin/localhost.key
+config/local.json
 build
 dev-bundle.css
 dev-bundle.js

@@ -66,6 +66,7 @@ import preferences from 'config/preferences.json';
 // Remove fixtures in production
 //!steal-remove-start
 import fixture from 'can-fixture/';
+import config from 'i2web/config';
 import 'i2web/plugins/debug';
 //!steal-remove-end
 
@@ -299,7 +300,7 @@ const AppViewModel = canMap.extend({
     useFixtures: {
       type: 'boolean',
       value() {
-        if (System.isEnv('production')) {
+        if (System.isEnv('production') || config.useFixtures === false) {
           return false;
         }
         const inStorage = window.localStorage.getItem('preference/system/useFixtures');
