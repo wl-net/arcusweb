@@ -17,7 +17,7 @@ limitations under the License.
 <can-component tag="arcus-logo-tagline">
   <view>
     <div class="branding-wrapper">
-      <img src="/src/images/logo_fullcolor.svg" alt="i" class="logo">
+      <img src="/src/images/logo_fullcolor.svg" alt="Arcus Logo" class="logo">
     </div>
   </view>
 </can-component>

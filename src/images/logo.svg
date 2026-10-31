@@ -1,1 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 504 432"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-118 -101 236 202" role="img" aria-label="Arcus">
+  <title>Arcus</title>
+  <g stroke-width="0.6" stroke-linejoin="round">
+    <path d="M0 0L86.6 -50A100 100 0 0 0 0 -100Z" fill="#F28E5C" stroke="#F28E5C"/>
+    <path d="M0 0L0 -100A100 100 0 0 0 -86.6 -50Z" fill="#ECCF59" stroke="#ECCF59"/>
+    <path d="M0 0L-86.6 -50A100 100 0 0 0 -86.6 50Z" fill="#68CD81" stroke="#68CD81"/>
+    <path d="M0 0L-86.6 50A100 100 0 0 0 0 100Z" fill="#6287E0" stroke="#6287E0"/>
+    <path d="M0 0L0 100A100 100 0 0 0 86.6 50Z" fill="#493475" stroke="#493475"/>
+    <path d="M0 0L86.6 50A100 100 0 0 0 86.6 -50Z" fill="#EB5D5F" stroke="#EB5D5F"/>
+    <path d="M0 0L53.7 -31L0 -62Z" fill="#FFFFFF" stroke="#FFFFFF"/>
+    <path d="M0 0L0 -62L-53.7 -31Z" fill="#E8E8E8" stroke="#E8E8E8"/>
+    <path d="M0 0L-53.7 -31L-53.7 31L0 62Z" fill="#D1D1D1" stroke="#D1D1D1"/>
+    <path d="M0 0L0 62L53.7 31L53.7 -31Z" fill="#F6F6F6" stroke="#F6F6F6"/>
+  </g>
+</svg>

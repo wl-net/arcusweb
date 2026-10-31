@@ -18,6 +18,10 @@ limitations under the License.
 <can-import from="i2web/helpers/global"/>
 <can-import from="i2web/components/tooltip/" />
 
+<div class="branding-wrapper">
+  <img src="/src/images/logo_fullcolor.svg" alt="Arcus Logo" class="logo">
+  <p class="tagline">Arcus Smart Home</p>
+</div>
 <div class="login-wrapper col-xs-12 col-sm-8">
   {{#if isIE11()}}
     {{#matchRoute(subpage="create-account")}}
